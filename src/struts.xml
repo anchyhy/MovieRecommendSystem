@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.i18n.reload" value="false" />
+	<constant name="struts.configuration.xml.reload" value="false" />
+	<constant name="struts.action.extension" value="action," />
+
+	<package name="InitShow" namespace="/" extends="struts-default">
+		<action name="init" class="com.lzs.action.InitAction" method="init">
+			<result name="init">/index.jsp</result>
+		</action>
+	</package>
+	<package name="UserEntity" namespace="/" extends="struts-default">
+		<action name="login" class="com.lzs.action.UserAction" method="login">
+			<result name="loginfalse">/login.jsp</result>
+			<result name="logintrue">/index.jsp</result>
+		</action>
+		<action name="logout" class="com.lzs.action.UserAction" method="logout">
+			<result name="logout">/index.jsp</result>
+		</action>
+		<action name="regist" class="com.lzs.action.UserAction" method="regist">
+			<result name="regist">/index.jsp</result>
+		</action>
+	</package>
+	<package name="MovieEntity" namespace="/" extends="struts-default">
+		<action name="classification" class="com.lzs.action.MovieAction"
+			method="classification">
+			<result name="classification">/movie.jsp</result>
+		</action>
+	</package>
+	<package name="RatingEntity" namespace="/" extends="struts-default">
+		<action name="rate" class="com.lzs.action.RatingAction" method="rate">
+			<result name="rate">/information.jsp</result>
+		</action>
+		<action name="collaborateRating" class="com.lzs.action.RatingAction"
+			method="collaborateRating">
+			<result name="collaborateRating">/movie.jsp</result>
+		</action>
+		<action name="cbRating" class="com.lzs.action.RatingAction"
+			method="cbRating">
+			<result name="cbRating">/movie.jsp</result>
+		</action>
+		<action name="ratemovie" class="com.lzs.action.RatingAction" method="rateMovie">
+			<result name="ratemovie">/informatin.jsp</result>
+		</action>
+	</package>
+</struts>

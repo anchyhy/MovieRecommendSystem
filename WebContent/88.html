@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html {
+	height: 100%;
+}
+body {
+	height: 100%;
+	margin: 0;
+}
+.container {
+	height: 96%;
+	width: 96%;
+	margin: 0 auto;
+	padding: 10px 0;
+}
+.poster {
+	width: 50%;
+	height: 100%;
+	float: left;
+}
+.poster>img {
+	width: 100%;
+	height: 100%;
+	box-shadow: 4px 4px 10px #000000;
+}
+
+.introduction {
+	width: 50%;
+	height: 20%;
+	float: left;
+}
+
+.introduction>p {
+	margin: 0 20px;
+}
+
+.rating {
+	width: 50%;
+	height: 20%;
+	float: left;
+}
+
+.rating>p {
+	margin: 0 20px;
+}
+
+.prompt {
+	display: none;
+}
+</style>
+<title>Movie Information</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$(".rating>span").hover(function(){
+			$(".rating").children("span").css("color", "black");
+			$(".rating").children("span").text("☆");
+			var index = $(this).index() + 1;
+			$(".rating>span:lt("+ index +")").css("color", "#CCCC00");
+			$(".rating>span:lt("+ index +")").text("★");
+		}, function(){
+			var index = $(".rating>p>span").text();
+			$(".rating").children("span").css("color", "black");
+			$(".rating").children("span").text("☆");
+			$(".rating>span:lt("+ index +")").css("color", "#CCCC00");
+			$(".rating>span:lt("+ index +")").text("★");
+		})
+
+		$(".rating>span").click(function(){
+			$(".rating>p>span").text($(this).index() + 1);
+			$(".prompt>p>span").text($(this).index() + 1);
+			$.ajax({
+				type:'POST',
+				url:'ratemovie',
+				data:$("#form").serializeArray(),
+				data: {
+					"r": $(this).index() + 1,
+					"uid": $('#uid').prop("value"),
+					"mid": $('#mid').prop("value")
+						},
+				success:function() {
+					$(".rating").fadeOut(200);
+					$(".prompt").fadeIn(200);
+				}
+			});
+		});
+	});
+	</script>
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Superfish -->
+	<link rel="stylesheet" href="css/superfish.css">
+	<link rel="stylesheet" href="css/style.css">
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+<div >
+		<div>
+		<div>
+			<header >
+				<div class="container">
+					<div class="nav-header">
+						<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
+						<!-- START #fh5co-menu-wrap -->
+						<nav id="fh5co-menu-wrap" role="navigation">
+							<ul class="sf-menu" id="fh5co-primary-menu">
+							<c:if test="${user==null }">
+								<li>
+									<a href="#" class="fh5co-sub-ddown">User Management</a>
+									<ul class="fh5co-sub-menu">
+										<li><a href="login.jsp" >Login</a></li>
+										<li><a href="register.jsp">Register</a></li>
+									</ul>
+								</li>
+								</c:if>
+								<c:if test="${user != null }">
+									<li><a>Hi, ${user.username }</a></li>
+								</c:if>
+								<li>
+									<a href="#" class="fh5co-sub-ddown">Classification</a>
+									<ul class="fh5co-sub-menu">
+										<li><a href="classification?pageNum=1&pageSize=12&classification=action&flag=0" >Action</a></li>
+										<li><a href="classification?pageNum=1&pageSize=12&classification=adventure&flag=0" >Adventure</a></li>
+										<li><a href="classification?pageNum=1&pageSize=12&classification=animation&flag=0" >Animation</a></li>
+										<li><a href="classification?pageNum=1&pageSize=12&classification=children&flag=0">Children</a></li>
+										<li><a href="classification?pageNum=1&pageSize=12&classification=comedy&flag=0" >Comedy</a></li>
+										<li><a href="classification?pageNum=1&pageSize=12&classification=crime&flag=0" >Crime</a></li>
+										<li><a href="classification?pageNum=1&pageSize=12&classification=documentary&flag=0" >Documentary</a></li>
+										<li><a href="classification?pageNum=1&pageSize=12&classification=drama&flag=0" >Drama</a></li>
+										<li><a href="classification?pageNum=1&pageSize=12&classification=fantasy&flag=0" >Fantasy</a></li>
+										<li><a href="classification?pageNum=1&pageSize=12&classification=filmnoir&flag=0" >Filmnoir</a></li>
+										<li><a href="classification?pageNum=1&pageSize=12&classification=horror&flag=0" >Horror</a></li>
+										<li><a href="classification?pageNum=1&pageSize=12&classification=musical&flag=0" >Musical</a></li>
+										<li><a href="classification?pageNum=1&pageSize=12&classification=mystery&flag=0" >Mystery</a></li>
+										<li><a href="classification?pageNum=1&pageSize=12&classification=romance&flag=0" >Romance</a></li>
+										<li><a href="classification?pageNum=1&pageSize=12&classification=scifi&flag=0" >Sci-Fi</a></li>
+										<li><a href="classification?pageNum=1&pageSize=12&classification=thriller&flag=0" >Thriller</a></li>
+										<li><a href="classification?pageNum=1&pageSize=12&classification=war&flag=0" >War</a></li>
+										<li><a href="classification?pageNum=1&pageSize=12&classification=western&flag=0">Western</a></li>
+										<li></li>
+									</ul>
+								</li>
+								<li><a href="#" class="fh5co-sub-ddown">Recommend For Me</a>
+								<ul class="fh5co-sub-menu">
+								<li><a href="cbRating?mf=0&uid=${user.id }&flag=1&way=1">content-based </a></li>
+								<li><a href="collaborateRating?uid=${user.id}&flag=1&mf=1&way=0">collaborate  </a></li>
+								</ul>
+								</li>
+								<c:if test="${user != null }"><li><a href="logout">Logout</a></li></c:if>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</header>
+		</div>
+	</div>
+	<!-- END fh5co-page -->
+
+	</div>
+	<div class="container">
+		<div class="poster">
+			<img src="images/img-1.jpg">
+		</div>
+		<div class="introduction">
+			<p>Title: ${movie.title }</p>
+			<p>rating: ${rating }</p>
+			<input type="hidden" id="uid"  value="${user.id}"/>
+			<input type="hidden" id="mid"  value="${movie.id}"/>
+		</div>
+		
+		<div class="rating">
+		<c:if test="${userrate == null }">
+		<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+		<p>Current Rating is <span>0</span></p>
+		</c:if>
+		<c:if test="${userrate !=null }">
+		<p>${userrate.rate }</p>
+		</c:if>
+		</div>
+		<div class="prompt">
+		<p>Your rating: <span></span></p>
+		</div>
+	</div>
+</body>
+</html>
